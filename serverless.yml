@@ -1,0 +1,40 @@
+service: nodejs-aws-crud-lambda #nombre del proyecto
+frameworkVersion: '3' #version del framework serverless
+
+provider: #indica adonde va a estar subida la funcion
+  name: aws #nube a la que se sube el codigo
+  runtime: nodejs14.x #version de nodejs que necesita este codigo para funcionar
+  region: us-west-2 #region en la que sera subido el codigo. Se debe elegir la region que este mas cerca de los usuarios que usaran la funcion para tener la menor latencia
+  iamRoleStatements: #defino los permisos a los cuales podran acceder las funciones
+    - Effect: Allow
+      Action: #defino el servicio que podran utilizar las funciones
+        - dynamodb:*
+      Resource: #defino el recurso que podre utilizar
+        - arn:aws:dynamodb:us-west-2:310406368943:table/TaskTable
+
+functions: #aca listamos todas las funciones que creamos
+  hello:
+    handler: handler.hello #handler es el nombre del archivo donde esta la funcion llamada 'hello'
+    events: #indica como sera ejecutada la funcion
+      - httpApi: #en este caso la funcion se ejecuta mediante una peticion http
+          path: / #ruta a la cual se accede para ejecutar la funcion
+          method: get #metodo que ejecuta la funcion
+
+# https://www.serverless.com/framework/docs/providers/aws/guide/resources
+# arn: amazon resource name
+resources:
+  Resources:
+    TaskTable: #defino un recurso. En este caso la tabla que usare
+      Type:  AWS::DynamoDB::Table #defino que tabla usare
+      Properties:
+        TableName: TaskTable
+        BillingMode: PAY_PER_REQUEST #a traves de que forma nos va a cobrar amazon. En este caso digo que me cobrara por la cantidad de peticiones que se hagan
+        AttributeDefinitions: #defino los campos de la tabla
+          - AttributeName: id
+            AttributeType: S #indico que el atributo es un string
+        KeySchema: #defino el id unico de los campos que estare creando
+          - AttributeName: id
+            KeyType: HASH
+
+# https://www.youtube.com/watch?v=wvux4WOU5dc
+# deje en 37:00
