@@ -14,11 +14,17 @@ provider: #indica adonde va a estar subida la funcion
 
 functions: #aca listamos todas las funciones que creamos
   hello:
-    handler: handler.hello #handler es el nombre del archivo donde esta la funcion llamada 'hello'
+    handler: src/hello.hello #hello es el nombre del archivo donde esta la funcion llamada 'hello'
     events: #indica como sera ejecutada la funcion
       - httpApi: #en este caso la funcion se ejecuta mediante una peticion http
           path: / #ruta a la cual se accede para ejecutar la funcion
           method: get #metodo que ejecuta la funcion
+  createTask:
+    handler: src/addTask.addTask #addTask es el nombre del archivo donde esta la funcion llamada 'addTask'
+    events: #indica como sera ejecutada la funcion
+      - httpApi: #en este caso la funcion se ejecuta mediante una peticion http
+          path: /tasks #ruta a la cual se accede para ejecutar la funcion
+          method: post #metodo que ejecuta la funcion
 
 # https://www.serverless.com/framework/docs/providers/aws/guide/resources
 # arn: amazon resource name
@@ -36,5 +42,9 @@ resources:
           - AttributeName: id
             KeyType: HASH
 
+#endpoints:
+#  GET - https://nykcc2wclk.execute-api.us-west-2.amazonaws.com/
+#  POST - https://nykcc2wclk.execute-api.us-west-2.amazonaws.com/tasks
+
 # https://www.youtube.com/watch?v=wvux4WOU5dc
-# deje en 37:00
+# deje en 49:55
