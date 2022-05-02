@@ -25,6 +25,12 @@ functions: #aca listamos todas las funciones que creamos
       - httpApi: #en este caso la funcion se ejecuta mediante una peticion http
           path: /tasks #ruta a la cual se accede para ejecutar la funcion
           method: post #metodo que ejecuta la funcion
+  getTasks:
+    handler: src/getTasks.getTasks
+    events:
+      - httpApi:
+          path: /tasks
+          method: get
 
 # https://www.serverless.com/framework/docs/providers/aws/guide/resources
 # arn: amazon resource name
