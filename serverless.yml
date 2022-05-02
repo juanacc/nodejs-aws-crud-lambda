@@ -31,6 +31,12 @@ functions: #aca listamos todas las funciones que creamos
       - httpApi:
           path: /tasks
           method: get
+  getTask:
+    handler: src/getTask.getTask
+    events:
+      - httpApi:
+          path: /tasks/{id} #aca se define que el parametro que vendra se llamara id. Este id es el que se usa luego para obtener el valor en la funcion
+          method: get
 
 # https://www.serverless.com/framework/docs/providers/aws/guide/resources
 # arn: amazon resource name
@@ -53,4 +59,4 @@ resources:
 #  POST - https://nykcc2wclk.execute-api.us-west-2.amazonaws.com/tasks
 
 # https://www.youtube.com/watch?v=wvux4WOU5dc
-# deje en 49:55
+# deje en 1:05:30
