@@ -14,7 +14,8 @@ const addTask=async (event)=>{//en el event esta la info que me envian desde el 
         id,
         title,
         description,
-        createdAt
+        createdAt,
+        done:false
     };
     
     //put me permite insertar datos en la tabla
