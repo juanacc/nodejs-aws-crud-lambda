@@ -43,6 +43,12 @@ functions: #aca listamos todas las funciones que creamos
       - httpApi:
           path: /tasks/{id}
           method: put
+  deleteTask:
+    handler: src/deleteTask.deleteTask
+    events:
+      - httpApi:
+          path: /tasks/{id}
+          method: delete
 
 # https://www.serverless.com/framework/docs/providers/aws/guide/resources
 # arn: amazon resource name
@@ -68,4 +74,4 @@ resources:
 #  PUT - https://nykcc2wclk.execute-api.us-west-2.amazonaws.com/tasks/{id}
 
 # https://www.youtube.com/watch?v=wvux4WOU5dc
-# deje en 1:17:02
+# deje en 1:20:47
